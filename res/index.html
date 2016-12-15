@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HPCC: Visualization</title>
+    <link href="./index.css" rel="stylesheet">
+
+    <script src="https://viz.hpccsystems.com/v1.16.0-beta2/dist-amd/hpcc-viz.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body onresize="resize();">
+    <div id="placeholder">
+    </div>
+    <script>
+        var app;
+
+        init(hpccsystems.require, window.location.href);
+
+        function init(requireContext, espUrl) {
+            requireApp(requireContext, function (App) {
+                app = new App()
+                    .target("placeholder")
+                    .showToolbar(true)
+                    .espUrl(espUrl)
+                    .espCache("")
+                ;
+                resize();
+            });
+        }
+
+        function resize() {
+            if (app) {
+                app
+                    .resize()
+                    .lazyRender()
+                ;
+            }
+        };
+    </script>
+</body>
+
+</html>
