@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HPCC:  Visualization</title>
+    <link href="./index.css" rel="stylesheet">
+
+    <script src="/viz/node_modules/requirejs/require.js"></script>
+    <script src="/viz/src/loader.js"></script>
+    <!--
+    <script src="/viz/node_modules/requirejs/require.js"></script>
+    <script src="/viz/src/loader.js"></script>
+    -->
+    <!--
+    <script src="/viz/dist-amd/hpcc-viz.js"></script>
+    -->
+    <!--
+    <script src="https://viz.hpccsystems.com/v1.16.0-beta2/dist-amd/hpcc-viz.js"></script>
+    -->
+    <script src="./index.js"></script>
+</head>
+
+<body onresize="resize();">
+    <div id="placeholder">
+    </div>
+    <script>
+        var app;
+
+        //  Locate most recent WU  ---
+        hpccsystems.require(["src/other/ESP"], function (ESP) {
+            var wsWorkuntis = new ESP.WsWorkunits("http://192.168.3.22:8010/");
+            wsWorkuntis.wuQuery({ PageSize: 1 }).then(function (response) {
+                if (response.length){
+                    init(hpccsystems.require, "http://192.168.3.22:8010/WsWorkunits/res/"+ response[0].Wuid + "/res/index.html");
+                }
+            });
+        });
+
+        function init(requireContext, espUrl) {
+            requireApp(requireContext, function (App) {
+                app = new App()
+                    .target("placeholder")
+                    .showToolbar(true)
+                    .espUrl(espUrl)
+                    .espCache("")
+                ;
+                resize();
+            });
+        }
+
+        function resize() {
+            if (app) {
+                app
+                    .resize()
+                    .lazyRender()
+                ;
+            }
+        };
+    </script>
+</body>
+
+</html>
