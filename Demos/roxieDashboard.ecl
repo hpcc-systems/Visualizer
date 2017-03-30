@@ -1,4 +1,4 @@
-﻿#WORKUNIT('name', 'hpcc-viz-SimpleDashbaord');
+﻿#WORKUNIT('name', 'hpcc-viz-RoxieDashboard');
 IMPORT $.^.SampleData.Sales;
 IMPORT $.^.Visualizer;
 
