@@ -6,9 +6,9 @@ EXPORT Visualizer := MODULE
         EXPORT Description := 'ECL Visualization Bundle';
         EXPORT Authors := ['HPCC Systems'];
         EXPORT License := 'http://www.apache.org/licenses/LICENSE-2.0';
-        EXPORT Copyright := 'Copyright (C) 2016 HPCC Systems';
+        EXPORT Copyright := 'Copyright (C) 2017 HPCC Systems';
         EXPORT DependsOn := [];
-        EXPORT Version := '1.0.0';
+        EXPORT Version := '1.0.1';
     END;
 
     EXPORT KeyValueDef := RECORD 
@@ -86,7 +86,7 @@ EXPORT Visualizer := MODULE
                             {'Geography', 7, 45, 52, 83},
                             {'Chemistry', 16, 73, 52, 83},
                             {'Spanish', 26, 83, 11, 72},
-                            {'Bioligy', 66, 60, 85, 6},
+                            {'Biology', 66, 60, 85, 6},
                             {'Physics', 46, 20, 53, 7},
                             {'Math', 98, 30, 23, 13}],
                             {STRING subject, INTEGER4 year1, INTEGER4 year2, INTEGER4 year3, INTEGER4 year4});
@@ -150,7 +150,7 @@ EXPORT Visualizer := MODULE
                             {'Chemistry', 16},
                             {'Irish', 26},
                             {'Spanish', 67},
-                            {'Bioligy', 66},
+                            {'Biology', 66},
                             {'Physics', 46},
                             {'Math', 98}],
                             {STRING subject, INTEGER4 year});
@@ -230,7 +230,7 @@ EXPORT Visualizer := MODULE
                             {'Geography', 7, 45, 52, 83},
                             {'Chemistry', 16, 73, 52, 83},
                             {'Spanish', 26, 83, 11, 72},
-                            {'Bioligy', 66, 60, 85, 6},
+                            {'Biology', 66, 60, 85, 6},
                             {'Physics', 46, 20, 53, 7},
                             {'Math', 98, 30, 23, 13}],
                             {STRING subject, INTEGER4 year1, INTEGER4 year2, INTEGER4 year3, INTEGER4 year4});
