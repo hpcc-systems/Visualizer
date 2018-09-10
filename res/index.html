@@ -2,11 +2,52 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>HPCC: Visualization</title>
     <link href="./index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@hpcc-js/common@2.0.0/font-awesome/css/font-awesome.min.css">
+    <script src="https://unpkg.com/requirejs@2.3.6/require"></script>
 
-    <script src="https://viz.hpccsystems.com/v1.16.0-beta2/dist-amd/hpcc-viz.js"></script>
-    <script src="./index.js"></script>
+    <script>
+        var espUrl = window.location.href;
+        var paths = {
+            "d3-fetch": "https://unpkg.com/d3-fetch@1.1.2/dist/d3-fetch.min",
+            "d3-dsv": "https://unpkg.com/d3-dsv/dist/d3-dsv.min",
+            "@hpcc-js/api": "https://unpkg.com/@hpcc-js/api@2.0.3/dist/index",
+            "@hpcc-js/chart": "https://unpkg.com/@hpcc-js/chart@2.1.2/dist/index",
+            "@hpcc-js/codemirror": "https://unpkg.com/@hpcc-js/codemirror@2.0.4/dist/index",
+            "@hpcc-js/codemirror-shim": "https://unpkg.com/@hpcc-js/codemirror-shim@2.0.2/dist/index",
+            "@hpcc-js/common": "https://unpkg.com/@hpcc-js/common@2.2.1/dist/index",
+            "@hpcc-js/comms": "https://unpkg.com/@hpcc-js/comms@2.0.3/dist/index",
+            "@hpcc-js/composite": "https://unpkg.com/@hpcc-js/composite@2.0.4/dist/index",
+            "@hpcc-js/dgrid": "https://unpkg.com/@hpcc-js/dgrid@2.0.4/dist/index",
+            "@hpcc-js/dgrid-shim": "https://unpkg.com/@hpcc-js/dgrid-shim@2.0.3/dist/index",
+            "@hpcc-js/form": "https://unpkg.com/@hpcc-js/form@2.0.3/dist/index",
+            "@hpcc-js/graph": "https://unpkg.com/@hpcc-js/graph@2.2.0/dist/index",
+            "@hpcc-js/layout": "https://unpkg.com/@hpcc-js/layout@2.1.3/dist/index",
+            "@hpcc-js/map": "https://unpkg.com/@hpcc-js/map@2.0.4/dist/index",
+            "@hpcc-js/other": "https://unpkg.com/@hpcc-js/other@2.1.3/dist/index",
+            "@hpcc-js/phosphor": "https://unpkg.com/@hpcc-js/phosphor@2.1.3/dist/index",
+            "@hpcc-js/phosphor-shim": "https://unpkg.com/@hpcc-js/phosphor-shim@2.0.2/dist/index",
+            "@hpcc-js/timeline": "https://unpkg.com/@hpcc-js/timeline@2.0.3/dist/index",
+            "@hpcc-js/tree": "https://unpkg.com/@hpcc-js/tree@2.0.3/dist/index",
+            "@hpcc-js/util": "https://unpkg.com/@hpcc-js/util@2.1.1/dist/index",
+            "tslib": "https://unpkg.com/tslib@1.9.3/tslib"
+        };
+        var debugWuid = window.location.search.split("?")[1];
+        if (debugWuid) {
+            espUrl = "http://192.168.3.22:8010/WsWorkunits/res/" + debugWuid + "/res/index.html";
+            for (var key in paths) {
+                if (key.indexOf("@hpcc-js") === 0) {
+                    paths[key] = "../hpcc-js/packages/" + key.split("/")[1] + "/dist/index";
+                }
+            }
+        }
+        require.config({
+            baseUrl: ".",
+            paths: paths
+        });
+    </script>
 </head>
 
 <body onresize="resize();">
@@ -14,27 +55,22 @@
     </div>
     <script>
         var app;
-
-        init(hpccsystems.require, window.location.href);
-
-        function init(requireContext, espUrl) {
-            requireApp(requireContext, function (App) {
-                app = new App()
-                    .target("placeholder")
-                    .showToolbar(true)
-                    .espUrl(espUrl)
-                    .espCache("")
+        require([debugWuid ? "../lib-umd/index" : "./index.min"], function (indexMod) {
+            app = new indexMod.BundleDermatology()
+                .target("placeholder")
+                .showToolbar(true)
+                .espUrl(espUrl)
+                .espCache("")
                 ;
-                resize();
-            });
-        }
+            resize();
+        });
 
         function resize() {
             if (app) {
                 app
                     .resize()
                     .lazyRender()
-                ;
+                    ;
             }
         };
     </script>

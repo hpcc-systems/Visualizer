@@ -2,8 +2,8 @@
 IMPORT $.^.SampleData.Sales;
 IMPORT $.^.Visualizer;
 
-//  Output entire dataset - can be any shape
-OUTPUT(CHOOSEN(SORT(Sales.CleanDataset, Fixed_Order_Date), ALL), NAMED('Sales'));
+//  Output sample of dataset - can be any shape
+OUTPUT(CHOOSEN(SORT(Sales.CleanDataset(Region='West'), Fixed_Order_Date), ALL), NAMED('Sales'));
 
 //  Declare viz columns <--> output field mapping (the viz pulls only the columns of data it needs from the entire dataset)
 mappings :=  DATASET([  {'Date', 'Fixed_Order_Date'}, 
