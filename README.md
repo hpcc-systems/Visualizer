@@ -20,15 +20,15 @@ To install, use the ecl command line interface.
 2. Unzip to “Visualizer” folder:  ```…\Downloads\Visualizer-master.zip -> …\Downloads\Visualizer```
 3. Install using the command line interface:  ```ecl bundle install %USERPROFILE%\Downloads\Visualizer```
 
-Alternativly you can install direct from GitHub:
+Alternatively you can install direct from GitHub:
 ```
 ecl bundle install https://github.com/hpcc-systems/Visualizer.git
 ```
 
 All going well you should see:
 ```
-Installing bundle Visualizer version 1.0.1
-Visualizer    1.0.1      ECL Visualization
+Installing bundle Visualizer version 2.0.0
+Visualizer    2.0.0      ECL Visualization
 Bundle Installation complete
 ```    
 

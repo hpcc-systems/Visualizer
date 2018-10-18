@@ -1,3 +1,6 @@
 .vscode
-viz
+node_modules
 eclcc.log
+dist/
+lib*/
+types
