@@ -3,6 +3,7 @@ import { Edge, Graph, Vertex } from "@hpcc-js/graph";
 // @ts-ignore
 import { createResult, flattenResult } from "@hpcc-js/other";
 import { Dashboard } from "./Dashboard";
+import { ScatterLine } from "./ScatterLine";
 
 declare function require(pkgNames: string[], callback: (...pkgs: any[]) => void);
 
@@ -134,6 +135,9 @@ export class WUWidget extends Widget {
                 switch (parsedClassID.def) {
                     case "Dashboard":
                         resolve(Dashboard as any);
+                        break;
+                    case "ScatterLine":
+                        resolve(ScatterLine as any);
                         break;
                 }
             } else {

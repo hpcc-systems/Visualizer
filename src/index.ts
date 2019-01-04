@@ -87,7 +87,7 @@ export class WUDashboard {
                 if (metas.length === 1 && metas[0].widgetClass() === Dashboard) {
                     context.grid = metas[0].createWidget();
                     metas[0].widget(context.grid);
-                    return metas[0].refreshData({}, context.grid.maxRowCount()).then(() => {
+                    return metas[0].refreshData({}, context.grid.maxRowCount())!.then(() => {
                         return context.grid;
                     });
                 }

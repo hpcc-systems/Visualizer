@@ -1,4 +1,5 @@
 .vscode
+.eclcc
 node_modules
 eclcc.log
 dist/

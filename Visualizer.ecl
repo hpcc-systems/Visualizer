@@ -6,9 +6,9 @@ EXPORT Visualizer := MODULE
         EXPORT Description := 'ECL Visualization Bundle';
         EXPORT Authors := ['HPCC Systems'];
         EXPORT License := 'http://www.apache.org/licenses/LICENSE-2.0';
-        EXPORT Copyright := 'Copyright (C) 2017 HPCC Systems';
+        EXPORT Copyright := 'Copyright (C) 2019 HPCC Systems';
         EXPORT DependsOn := [];
-        EXPORT Version := '2.0.0';
+        EXPORT Version := '2.1.0';
     END;
 
     EXPORT KeyValueDef := RECORD 
@@ -258,7 +258,12 @@ EXPORT Visualizer := MODULE
             _props2 := DATASET([{'xAxisType', 'linear'}], KeyValueDef) + _properties;
             RETURN Meta('chart_Scatter', _id, _dataSource, _outputName, _mappings, _filteredBy, _props2);
         END;
-        
+
+        EXPORT Line(STRING _id, STRING _dataSource = '', STRING _outputName = '', DATASET(KeyValueDef) _mappings = NullKeyValue, DATASET(FiltersDef) _filteredBy = NullFilters, DATASET(KeyValueDef) _properties = NullKeyValue) := FUNCTION
+            _props2 := DATASET([{'xAxisType', 'linear'}], KeyValueDef) + _properties;
+            RETURN Meta('chart_Line', _id, _dataSource, _outputName, _mappings, _filteredBy, _props2);
+        END;
+
         EXPORT HexBin(STRING _id, STRING _dataSource = '', STRING _outputName = '', DATASET(KeyValueDef) _mappings = NullKeyValue, DATASET(FiltersDef) _filteredBy = NullFilters, DATASET(KeyValueDef) _properties = NullKeyValue) := FUNCTION
             _props2 := DATASET([{'xAxisType', 'linear'}], KeyValueDef) + _properties;
             RETURN Meta('chart_HexBin', _id, _dataSource, _outputName, _mappings, _filteredBy, _props2);
@@ -274,14 +279,15 @@ EXPORT Visualizer := MODULE
             ds := DATASET([
                 {5.1,3.5},{4.9,3.0},{4.7,3.2},{4.6,3.1},{5.0,3.6},{5.4,3.9},{4.6,3.4},{5.0,3.4},{4.4,2.9},{4.9,3.1},{5.4,3.7},{4.8,3.4},{4.8,3.0},{4.3,3.0},{5.8,4.0},{5.7,4.4},{5.4,3.9},{5.1,3.5},{5.7,3.8},{5.1,3.8},{5.4,3.4},{5.1,3.7},{4.6,3.6},{5.1,3.3},{4.8,3.4},{5.0,3.0},{5.0,3.4},{5.2,3.5},{5.2,3.4},{4.7,3.2},{4.8,3.1},{5.4,3.4},{5.2,4.1},{5.5,4.2},{4.9,3.1},{5.0,3.2},{5.5,3.5},{4.9,3.6},{4.4,3.0},{5.1,3.4},{5.0,3.5},{4.5,2.3},{4.4,3.2},{5.0,3.5},{5.1,3.8},{4.8,3.0},{5.1,3.8},{4.6,3.2},{5.3,3.7},{5.0,3.3},{7.0,3.2},{6.4,3.2},{6.9,3.1},{5.5,2.3},{6.5,2.8},{5.7,2.8},{6.3,3.3},{4.9,2.4},{6.6,2.9},{5.2,2.7},{5.0,2.0},{5.9,3.0},{6.0,2.2},{6.1,2.9},{5.6,2.9},{6.7,3.1},{5.6,3.0},{5.8,2.7},{6.2,2.2},{5.6,2.5},{5.9,3.2},{6.1,2.8},{6.3,2.5},{6.1,2.8},{6.4,2.9},{6.6,3.0},{6.8,2.8},{6.7,3.0},{6.0,2.9},{5.7,2.6},{5.5,2.4},{5.5,2.4},{5.8,2.7},{6.0,2.7},{5.4,3.0},{6.0,3.4},{6.7,3.1},{6.3,2.3},{5.6,3.0},{5.5,2.5},{5.5,2.6},{6.1,3.0},{5.8,2.6},{5.0,2.3},{5.6,2.7},{5.7,3.0},{5.7,2.9},{6.2,2.9},{5.1,2.5},{5.7,2.8},{6.3,3.3},{5.8,2.7},{7.1,3.0},{6.3,2.9},{6.5,3.0},{7.6,3.0},{4.9,2.5},{7.3,2.9},{6.7,2.5},{7.2,3.6},{6.5,3.2},{6.4,2.7},{6.8,3.0},{5.7,2.5},{5.8,2.8},{6.4,3.2},{6.5,3.0},{7.7,3.8},{7.7,2.6},{6.0,2.2},{6.9,3.2},{5.6,2.8},{7.7,2.8},{6.3,2.7},{6.7,3.3},{7.2,3.2},{6.2,2.8},{6.1,3.0},{6.4,2.8},{7.2,3.0},{7.4,2.8},{7.9,3.8},{6.4,2.8},{6.3,2.8},{6.1,2.6},{7.7,3.0},{6.3,3.4},{6.4,3.1},{6.0,3.0},{6.9,3.1},{6.7,3.1},{6.9,3.1},{5.8,2.7},{6.8,3.2},{6.7,3.3},{6.7,3.0},{6.3,2.5},{6.5,3.0},{6.2,3.4},{5.9,3.0}
                 ],
-                {REAL subject, REAL year});
+                {REAL x, REAL y});
             data_points := OUTPUT(ds, NAMED('TwoDLinear__test'));
-            
+
             viz_scatter := Scatter('ScatterLinear',, 'TwoDLinear__test');
+            viz_line := Line('LineLinear',, 'TwoDLinear__test');
             viz_hexbin := HexBin('HexBinLinear',, 'TwoDLinear__test');
             viz_contour := Contour('ContourLinear',, 'TwoDLinear__test');
             
-            RETURN PARALLEL(data_points, viz_scatter, viz_hexbin, viz_contour);
+            RETURN PARALLEL(data_points, viz_scatter, viz_line, viz_hexbin, viz_contour);
         END;
        
     END;
@@ -368,6 +374,42 @@ EXPORT Visualizer := MODULE
         END;
     END;
     
+    EXPORT MultiDLinear := MODULE
+            
+        /**
+        * Renders data in a visualization 
+        *
+        * mappings can be used to limit / rename the columns.
+        * 
+        * @param _id            Visualization ID
+        * @param _dataSource    Location of result (WU, Logical File, Roxie), defaults to current WU
+        * @param _outputName    Result name (ignored for Logical Files)
+        * @param _mappings      Maps Column Name <--> field ID
+        * @param _filteredBy    Specifies filter condition
+        * @param _properties    User specified dermatology properties
+        * @return               A "meta" output describing the visualization 
+        * @see                  Common/Meta
+        **/    
+        EXPORT ScatterLine(STRING _id, STRING _dataSource = '', STRING _outputName = '', DATASET(KeyValueDef) _mappings = NullKeyValue, DATASET(FiltersDef) _filteredBy = NullFilters, DATASET(KeyValueDef) _properties = NullKeyValue) := FUNCTION
+            _props2 := DATASET([{'xAxisType', 'linear'}], KeyValueDef) + _properties;
+            RETURN Meta('visualizer_ScatterLine', _id, _dataSource, _outputName, _mappings, _filteredBy, _props2);
+        END;
+
+
+        EXPORT __test := FUNCTION
+            ds := DATASET([
+                {5.1,3.5,2.0},{4.9,3.0,2.0},{4.7,3.2,2.0},{4.6,3.1,2.0},{5.0,3.6,2.0},{5.4,3.9,2.0},{4.6,3.4,2.0},{5.0,3.4,2.0},{4.4,2.9,2.0},{4.9,3.1,2.0},{5.4,3.7,2.0},{4.8,3.4,2.0},{4.8,3.0,2.0},{4.3,3.0,2.0},{5.8,4.0,2.0},{5.7,4.4,2.0},{5.4,3.9,2.0},{5.1,3.5,2.0},{5.7,3.8,2.0},{5.1,3.8,2.0},{5.4,3.4,2.0},{5.1,3.7,2.0},{4.6,3.6,2.0},{5.1,3.3,2.0},{4.8,3.4,2.0},{5.0,3.0,2.0},{5.0,3.4,2.0},{5.2,3.5,2.0},{5.2,3.4,2.0},{4.7,3.2,2.0},{4.8,3.1,2.0},{5.4,3.4,2.0},{5.2,4.1,2.0},{5.5,4.2,2.0},{4.9,3.1,2.0},{5.0,3.2,2.0},{5.5,3.5,2.0},{4.9,3.6,2.0},{4.4,3.0,2.0},{5.1,3.4,2.0},{5.0,3.5,2.0},{4.5,2.3,2.0},{4.4,3.2,2.0},{5.0,3.5,2.0},{5.1,3.8,2.0},{4.8,3.0,2.0},{5.1,3.8,2.0},{4.6,3.2,2.0},{5.3,3.7,2.0},{5.0,3.3,2.0},{7.0,3.2,2.0},{6.4,3.2,2.0},{6.9,3.1,2.0},{5.5,2.3,2.0},{6.5,2.8,2.0},{5.7,2.8,2.0},{6.3,3.3,2.0},{4.9,2.4,2.0},{6.6,2.9,2.0},{5.2,2.7,2.0},{5.0,2.0,2.0},{5.9,3.0,2.0},{6.0,2.2,2.0},{6.1,2.9,2.0},{5.6,2.9,2.0},{6.7,3.1,2.0},{5.6,3.0,2.0},{5.8,2.7,2.0},{6.2,2.2,2.0},{5.6,2.5,2.0},{5.9,3.2,2.0},{6.1,2.8,2.0},{6.3,2.5,2.0},{6.1,2.8,2.0},{6.4,2.9,2.0},{6.6,3.0,2.0},{6.8,2.8,2.0},{6.7,3.0,2.0},{6.0,2.9,2.0},{5.7,2.6,2.0},{5.5,2.4,2.0},{5.5,2.4,2.0},{5.8,2.7,2.0},{6.0,2.7,2.0},{5.4,3.0,2.0},{6.0,3.4,2.0},{6.7,3.1,2.0},{6.3,2.3,2.0},{5.6,3.0,2.0},{5.5,2.5,2.0},{5.5,2.6,2.0},{6.1,3.0,2.0},{5.8,2.6,2.0},{5.0,2.3,2.0},{5.6,2.7,2.0},{5.7,3.0,2.0},{5.7,2.9,2.0},{6.2,2.9,2.0},{5.1,2.5,2.0},{5.7,2.8,2.0},{6.3,3.3,2.0},{5.8,2.7,2.0},{7.1,3.0,2.0},{6.3,2.9,2.0},{6.5,3.0,2.0},{7.6,3.0,2.0},{4.9,2.5,2.0},{7.3,2.9,2.0},{6.7,2.5,2.0},{7.2,3.6,2.0},{6.5,3.2,2.0},{6.4,2.7,2.0},{6.8,3.0,2.0},{5.7,2.5,2.0},{5.8,2.8,2.0},{6.4,3.2,2.0},{6.5,3.0,2.0},{7.7,3.8,2.0},{7.7,2.6,2.0},{6.0,2.2,2.0},{6.9,3.2,2.0},{5.6,2.8,2.0},{7.7,2.8,2.0},{6.3,2.7,2.0},{6.7,3.3,2.0},{7.2,3.2,2.0},{6.2,2.8,2.0},{6.1,3.0,2.0},{6.4,2.8,2.0},{7.2,3.0,2.0},{7.4,2.8,2.0},{7.9,3.8,2.0},{6.4,2.8,2.0},{6.3,2.8,2.0},{6.1,2.6,2.0},{7.7,3.0,2.0},{6.3,3.4,2.0},{6.4,3.1,2.0},{6.0,3.0,2.0},{6.9,3.1,2.0},{6.7,3.1,2.0},{6.9,3.1,2.0},{5.8,2.7,2.0},{6.8,3.2,2.0},{6.7,3.3,2.0},{6.7,3.0,2.0},{6.3,2.5,2.0},{6.5,3.0,2.0},{6.2,3.4,2.0},{5.9,3.0,2.0}
+                ],
+                {REAL x, REAL y1, REAL y2});
+            data_points := OUTPUT(ds, NAMED('MultiDLinear__test'));
+            
+            viz_scatterLine := ScatterLine('ScatterLineLinear',, 'MultiDLinear__test');
+            
+            RETURN PARALLEL(data_points, viz_scatterLine);
+        END;
+       
+    END;
+
     /*  -----------------------------------------------------------------------
         Relational Visualizations
 
@@ -609,6 +651,6 @@ EXPORT Visualizer := MODULE
     END;
 
     EXPORT main := FUNCTION
-        RETURN PARALLEL(Any.__test, TwoD.__test, TwoDLinear.__test, MultiD.__test, Relational.__test, Choropleth.__test);
+        RETURN PARALLEL(Any.__test, TwoD.__test, TwoDLinear.__test, MultiD.__test, MultiDLinear.__test, Relational.__test, Choropleth.__test);
     END;
 END;
