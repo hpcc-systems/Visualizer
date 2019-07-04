@@ -4,3 +4,4 @@ eclcc.log
 dist/
 lib*/
 types
+.eclcc

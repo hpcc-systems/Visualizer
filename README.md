@@ -25,16 +25,18 @@ Alternatively you can install direct from GitHub:
 ecl bundle install https://github.com/hpcc-systems/Visualizer.git
 ```
 
+**Note**:  Depending on your OS you may need to run `cmd` as administrator.
+
 All going well you should see:
 ```
-Installing bundle Visualizer version 2.0.0
-Visualizer    2.0.0      ECL Visualization
+Installing bundle Visualizer version 2.1.0
+Visualizer    2.1.0      ECL Visualization
 Bundle Installation complete
 ```    
 
 **Note I**:  You may find it easier to manually set the PATH to include the ecl client tools:
 ```
-set PATH=%PATH%;"c:\Program Files (x86)\HPCCSystems\6.2.0\clienttools\bin"
+set PATH=%PATH%;"c:\Program Files (x86)\HPCCSystems\7.4.0\clienttools\bin"
 ```
 
 **Note II**:  To use the "ecl bundle install &lt;git url&gt;" command, git must be installed on your machine and accessible to the user (in the path).
@@ -68,3 +70,16 @@ Viewing the Visualization
 After running a query with a visualization included, you can see the visualization in ECL Watch.
 
 Open the workunit, then select the **Resources** tab.
+
+Tutorial / Demos
+================
+* Tutorial:  
+    * [Interactive Dashboard](tutorial/README.md)
+* Demos:
+    * [Hello World](Demos/helloWorld)
+    * [Pie Chart](Demos/pieChart.ecl)
+    * [Column Chart](Demos/columnChart.ecl)
+    * [Area Chart (with mappings)](Demos/areaChart-mappings.ecl)
+    * [Area Chart (with mappings + properties)](Demos/areaChart-mappings-properties.ecl)
+    * [Dashboard](Demos/dashboard.ecl)
+    * [Roxie Dashboard](Demos/roxieDashboard.ecl)

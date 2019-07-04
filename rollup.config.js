@@ -6,7 +6,7 @@ import postcss from "rollup-plugin-postcss";
 const pkg = require("./package.json");
 
 function externals(id) {
-    return !!pkg.devDependencies[id];
+    return id.indexOf("@hpcc-js") === 0;
 }
 
 function globals(id) {
@@ -24,7 +24,8 @@ export default {
         format: "amd",
         sourcemap: true,
         globals: globals,
-        name: pkg.name
+        name: pkg.name,
+        strict: false
     },
     plugins: [
         alias({

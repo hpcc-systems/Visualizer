@@ -6,9 +6,9 @@ EXPORT Visualizer := MODULE
         EXPORT Description := 'ECL Visualization Bundle';
         EXPORT Authors := ['HPCC Systems'];
         EXPORT License := 'http://www.apache.org/licenses/LICENSE-2.0';
-        EXPORT Copyright := 'Copyright (C) 2017 HPCC Systems';
+        EXPORT Copyright := 'Copyright (C) 2019 HPCC Systems';
         EXPORT DependsOn := [];
-        EXPORT Version := '2.0.0';
+        EXPORT Version := '2.1.0';
     END;
 
     EXPORT KeyValueDef := RECORD 
