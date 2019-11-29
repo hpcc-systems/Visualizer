@@ -5,34 +5,35 @@
     <meta charset="utf-8">
     <title>HPCC: Visualization</title>
     <link href="./index.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/@hpcc-js/common@2.0.0/font-awesome/css/font-awesome.min.css">
-    <script src="https://unpkg.com/requirejs@2.3.6/require"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@hpcc-js/common@2.0.0/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.js"></script>
 
     <script>
         var espUrl = window.location.href;
         var paths = {
-            "d3-fetch": "https://unpkg.com/d3-fetch@1.1.2/dist/d3-fetch.min",
-            "d3-dsv": "https://unpkg.com/d3-dsv/dist/d3-dsv.min",
-            "@hpcc-js/api": "https://unpkg.com/@hpcc-js/api@2.0.3/dist/index",
-            "@hpcc-js/chart": "https://unpkg.com/@hpcc-js/chart@2.1.2/dist/index",
-            "@hpcc-js/codemirror": "https://unpkg.com/@hpcc-js/codemirror@2.0.4/dist/index",
-            "@hpcc-js/codemirror-shim": "https://unpkg.com/@hpcc-js/codemirror-shim@2.0.2/dist/index",
-            "@hpcc-js/common": "https://unpkg.com/@hpcc-js/common@2.2.1/dist/index",
-            "@hpcc-js/comms": "https://unpkg.com/@hpcc-js/comms@2.0.3/dist/index",
-            "@hpcc-js/composite": "https://unpkg.com/@hpcc-js/composite@2.0.4/dist/index",
-            "@hpcc-js/dgrid": "https://unpkg.com/@hpcc-js/dgrid@2.0.4/dist/index",
-            "@hpcc-js/dgrid-shim": "https://unpkg.com/@hpcc-js/dgrid-shim@2.0.3/dist/index",
-            "@hpcc-js/form": "https://unpkg.com/@hpcc-js/form@2.0.3/dist/index",
-            "@hpcc-js/graph": "https://unpkg.com/@hpcc-js/graph@2.2.0/dist/index",
-            "@hpcc-js/layout": "https://unpkg.com/@hpcc-js/layout@2.1.3/dist/index",
-            "@hpcc-js/map": "https://unpkg.com/@hpcc-js/map@2.0.4/dist/index",
-            "@hpcc-js/other": "https://unpkg.com/@hpcc-js/other@2.1.3/dist/index",
-            "@hpcc-js/phosphor": "https://unpkg.com/@hpcc-js/phosphor@2.1.3/dist/index",
-            "@hpcc-js/phosphor-shim": "https://unpkg.com/@hpcc-js/phosphor-shim@2.0.2/dist/index",
-            "@hpcc-js/timeline": "https://unpkg.com/@hpcc-js/timeline@2.0.3/dist/index",
-            "@hpcc-js/tree": "https://unpkg.com/@hpcc-js/tree@2.0.3/dist/index",
-            "@hpcc-js/util": "https://unpkg.com/@hpcc-js/util@2.1.1/dist/index",
-            "tslib": "https://unpkg.com/tslib@1.9.3/tslib"
+            "d3-fetch": "https://cdn.jsdelivr.net/npm/d3-fetch@1.1.2/dist/d3-fetch.min",
+            "d3-dsv": "https://cdn.jsdelivr.net/npm/d3-dsv/dist/d3-dsv.min",
+            "@hpcc-js/api": "https://cdn.jsdelivr.net/npm/@hpcc-js/api@2.0.3/dist/index.min",
+            "@hpcc-js/chart": "https://cdn.jsdelivr.net/npm/@hpcc-js/chart@2.1.2/dist/index.min",
+            "@hpcc-js/codemirror": "https://cdn.jsdelivr.net/npm/@hpcc-js/codemirror@2.0.4/dist/index.min",
+            "@hpcc-js/codemirror-shim": "https://cdn.jsdelivr.net/npm/@hpcc-js/codemirror-shim@2.0.2/dist/index.min",
+            "@hpcc-js/common": "https://cdn.jsdelivr.net/npm/@hpcc-js/common@2.2.1/dist/index.min",
+            "@hpcc-js/comms": "https://cdn.jsdelivr.net/npm/@hpcc-js/comms@2.0.3/dist/index.min",
+            "@hpcc-js/composite": "https://cdn.jsdelivr.net/npm/@hpcc-js/composite@2.0.4/dist/index.min",
+            "@hpcc-js/dgrid": "https://cdn.jsdelivr.net/npm/@hpcc-js/dgrid@2.0.4/dist/index.min",
+            "@hpcc-js/dgrid-shim": "https://cdn.jsdelivr.net/npm/@hpcc-js/dgrid-shim@2.0.3/dist/index.min",
+            "@hpcc-js/form": "https://cdn.jsdelivr.net/npm/@hpcc-js/form@2.0.3/dist/index.min",
+            "@hpcc-js/graph": "https://cdn.jsdelivr.net/npm/@hpcc-js/graph@2.2.0/dist/index.min",
+            "@hpcc-js/layout": "https://cdn.jsdelivr.net/npm/@hpcc-js/layout@2.1.3/dist/index.min",
+            "@hpcc-js/map": "https://cdn.jsdelivr.net/npm/@hpcc-js/map@2.0.4/dist/index.min",
+            "@hpcc-js/other": "https://cdn.jsdelivr.net/npm/@hpcc-js/other@2.1.3/dist/index.min",
+            "@hpcc-js/phosphor": "https://cdn.jsdelivr.net/npm/@hpcc-js/phosphor@2.1.3/dist/index.min",
+            "@hpcc-js/phosphor-shim": "https://cdn.jsdelivr.net/npm/@hpcc-js/phosphor-shim@2.0.2/dist/index.min",
+            "@hpcc-js/timeline": "https://cdn.jsdelivr.net/npm/@hpcc-js/timeline@2.0.3/dist/index.min",
+            "@hpcc-js/tree": "https://cdn.jsdelivr.net/npm/@hpcc-js/tree@2.0.3/dist/index.min",
+            "@hpcc-js/util": "https://cdn.jsdelivr.net/npm/@hpcc-js/util@2.1.1/dist/index.min",
+            "tslib": "https://cdn.jsdelivr.net/npm/tslib@1.9.3/tslib"
         };
         var debugWuid = window.location.search.split("?")[1];
         if (debugWuid) {

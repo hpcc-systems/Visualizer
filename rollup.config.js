@@ -1,6 +1,6 @@
-import alias from 'rollup-plugin-alias';
-import commonjs from 'rollup-plugin-commonjs';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import postcss from "rollup-plugin-postcss";
 
 const pkg = require("./package.json");
