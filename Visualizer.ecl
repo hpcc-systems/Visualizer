@@ -8,7 +8,7 @@ EXPORT Visualizer := MODULE
         EXPORT License := 'http://www.apache.org/licenses/LICENSE-2.0';
         EXPORT Copyright := 'Copyright (C) 2017 HPCC Systems';
         EXPORT DependsOn := [];
-        EXPORT Version := '2.0.0';
+        EXPORT Version := '2.0.1';
     END;
 
     EXPORT KeyValueDef := RECORD 

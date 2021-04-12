@@ -27,8 +27,8 @@ ecl bundle install https://github.com/hpcc-systems/Visualizer.git
 
 All going well you should see:
 ```
-Installing bundle Visualizer version 2.0.0
-Visualizer    2.0.0      ECL Visualization
+Installing bundle Visualizer version 2.0.1
+Visualizer    2.0.1      ECL Visualization
 Bundle Installation complete
 ```    
 
