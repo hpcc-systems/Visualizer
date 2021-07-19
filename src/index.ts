@@ -1,4 +1,5 @@
 import { Utility, Widget } from "@hpcc-js/common";
+import { Workunit } from "@hpcc-js/comms";
 import { Dermatology, Persist } from "@hpcc-js/composite";
 import { Button } from "@hpcc-js/form";
 import { topoJsonFolder } from "@hpcc-js/map";
@@ -103,7 +104,7 @@ export class WUDashboard {
                 .snappingColumns(snappingColumns)
                 .snappingRows(snappingRows)
                 ;
-            metas.forEach(function (wuWidget: WUWidget, i) {
+            metas.forEach(async function (wuWidget: WUWidget, i) {
                 let widget = context.grid.getContent(wuWidget.id());
                 if (!widget) {
                     let rowPos = 0;
@@ -120,6 +121,30 @@ export class WUDashboard {
                     context.grid.setContent(rowPos * cellDensity, colPos * cellDensity, widget, null, cellDensity, cellDensity);
                 }
                 switch (widget.classID()) {
+                    case "observable-md_ObservableMD":
+                    case "observable-md_Observable":
+                        const wu = await Workunit.attach({ baseUrl: `${context._espWorkunit._protocol}//${context._espWorkunit._host}` }, context._espWorkunit._wuid);
+                        const results = await wu.fetchResults();
+                        const plugins = {
+                            wuid: () => wu.Wuid,
+                            outputs: () => {
+                                return results.map(r => {
+                                    return {
+                                        name: r.Name,
+                                        count: r.Total,
+                                        value: r.Value,
+                                        logicalFile: r.LogicalFileName
+                                    };
+                                });
+                            }
+                        };
+                        results.forEach(r => {
+                            plugins[r.Name] = async () => {
+                                return r.fetchRows();
+                            }
+                        });
+                        widget.plugins(plugins);
+                        break;
                     case "graph_Graph":
                         widget.on("vertex_click", function (this: Widget, row, col, sel) {
                             context.refreshFilters(this.id(), row, col, sel);
