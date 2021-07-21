@@ -8,7 +8,7 @@ EXPORT Visualizer := MODULE
         EXPORT License := 'http://www.apache.org/licenses/LICENSE-2.0';
         EXPORT Copyright := 'Copyright (C) 2017 HPCC Systems';
         EXPORT DependsOn := [];
-        EXPORT Version := '2.0.1';
+        EXPORT Version := '2.1.0';
     END;
 
     EXPORT KeyValueDef := RECORD 
@@ -583,6 +583,61 @@ EXPORT Visualizer := MODULE
         END;
     END;
 
+    /*  -----------------------------------------------------------------------
+        Observable Visualizations
+    */    
+    EXPORT Observable := MODULE
+            
+        /**
+        * Markdown:  Renders Observable MD Text  
+        *
+        * @param _id            Visualization ID
+        * @param _content       Observable Markdown Conent
+        * @param _properties    User specified dermatology properties
+        * @return               A "meta" output describing the visualization 
+        * @see                  Common/Meta
+        **/    
+        EXPORT Markdown(STRING _id, STRING _content = '', DATASET(KeyValueDef) _properties = NullKeyValue) := FUNCTION
+            _props2 := DATASET([{'mode', 'omd'}, {'text', _content}], KeyValueDef) + _properties;
+            RETURN Meta('observable-md_Observable', _id, , , , , _props2);
+        END;
+        
+        EXPORT __test := FUNCTION
+            ds := DATASET([ {'English', 5, 43, 41, 92},
+                            {'History', 17, 43, 83, 93},
+                            {'Geography', 7, 45, 52, 83},
+                            {'Chemistry', 16, 73, 52, 83},
+                            {'Spanish', 26, 83, 11, 72},
+                            {'Biology', 66, 60, 85, 6},
+                            {'Physics', 46, 20, 53, 7},
+                            {'Math', 98, 30, 23, 13}],
+                            {STRING subject, INTEGER4 year1, INTEGER4 year2, INTEGER4 year3, INTEGER4 year4});
+            my_data := OUTPUT(ds, NAMED('my_data'));
+
+            text := '# Hello and Welcome to ${mol}!\n' +
+            '\n' + 
+            'This ${wuid} has a result called "my_data":\n' + 
+            '\n' + 
+            '```\n'+
+            'Inputs.table(my_data);\n' +
+            '```\n' + 
+            '\n' + 
+            '```\n'+
+            'Plot.barY(my_data, {x: "subject", y: "year1"}).plot()\n' +
+            '```\n' + 
+            '\n' + 
+            '```\n'+
+            'mol = 42;\n' +
+            '```\n' + 
+            '';
+
+            viz_markdown := Markdown('observable', text);
+            
+            RETURN PARALLEL(my_data, viz_markdown);
+        END;
+       
+    END;
+
     EXPORT AutoDash := MODULE
         SHARED _postFix := '__hpcc_profile';
 
@@ -609,6 +664,6 @@ EXPORT Visualizer := MODULE
     END;
 
     EXPORT main := FUNCTION
-        RETURN PARALLEL(Any.__test, TwoD.__test, TwoDLinear.__test, MultiD.__test, Relational.__test, Choropleth.__test);
+        RETURN PARALLEL(Any.__test, TwoD.__test, TwoDLinear.__test, MultiD.__test, Relational.__test, Choropleth.__test, Observable.__test);
     END;
 END;

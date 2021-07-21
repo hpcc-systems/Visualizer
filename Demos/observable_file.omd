@@ -1,0 +1,54 @@
+# Observerable MD
+_Observable MD, is an extended version of [Markdown](https://www.markdownguide.org/getting-started/) which includes an interpreted version of the [Observable Runtime](https://github.com/observablehq/runtime).
+This allows the author to create detailed and interactive documents and is compatible with all the examples located at [Observable HQ](https://observablehq.com/explore)._
+
+## Variables
+_This document is initialised with the following variables_
+* **wuid**:  The current workunit ID (${wuid}).
+* **outputs**:  An array of the current workunit ouputs meta information (**name**, **count**, **value**, **logicalFile**).
+* **NAMED_OUTPUT**:  For each output the content can be accessed by simply referencing its name.
+---
+## Meta Information
+This ${wuid} has the following outputs:  
+```
+Inputs.table(outputs);
+```
+---
+## my_data
+Viewing the contents of an output in tabular form is just a matter of feeding it into `Input.table(my_data)`:
+```
+Inputs.table(my_data);
+```
+
+_(See [Observable Inputs.table](https://observablehq.com/@observablehq/inputs) for more information)_
+
+---
+## Plotting order_quantity v profit
+Viewing the contents of an output in a chart can be achieved by using the builtin Plot library:
+```
+Swatches({color: d3.scaleOrdinal(my_data.map(d => d.order_priority).sort(), d3.schemeTableau10)});
+Plot.dot(my_data, {x: "order_quantity", y:"profit", stroke: "order_priority"}).plot()
+```
+_(See [Observable Plot](https://observablehq.com/@observablehq/plot) for more information)_
+
+```
+// # Dependencies
+import {swatches as Swatches} from "@d3/color-legend";
+```
+
+```
+// # Fake Server
+hpccComms = require("@hpcc-js/comms");
+wu = await hpccComms.Workunit.attach({baseUrl:"http://localhost:8010"}, "W20210720-165036");
+results = await wu.fetchResults();
+wuid = wu.Wuid;
+outputs = results.map(r => {
+        return {
+            name: r.Name,
+            count: r.Total,
+            value: r.Value,
+            logicalFile: r.LogicalFileName
+        };
+});
+my_data = await results.filter(r=>r.Name==="my_data")[0].fetchRows();
+```
