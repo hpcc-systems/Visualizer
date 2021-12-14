@@ -15,30 +15,43 @@ In addition, the underlying visualization framework supports advanced features t
 Installation
 ============
 
-To install, use the ecl command line interface.
-1. Download:  https://github.com/hpcc-systems/Visualizer/archive/master.zip
-2. Unzip to “Visualizer” folder:  ```…\Downloads\Visualizer-master.zip -> …\Downloads\Visualizer```
-3. Install using the command line interface:  ```ecl bundle install %USERPROFILE%\Downloads\Visualizer```
+## VS Code with ECL Extension
 
-Alternatively you can install direct from GitHub:
+If you are using the [ECL Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=hpcc-systems.ecl) you can install any of the official bundles via the HPCC Systems icon on the activity bar:
+
+![image](images/vscode-install.png)
+
+## `ecl bundle` command line tool
+
+### With `git`
+
+To use this method, you will need to have both the `client tools` and `git` installed on your machine and accessible to the user (in the path).
 ```
 ecl bundle install https://github.com/hpcc-systems/Visualizer.git
 ```
 
-All going well you should see:
-```
-Installing bundle Visualizer version 2.0.1
-Visualizer    2.0.1      ECL Visualization
-Bundle Installation complete
-```    
-
-**Note I**:  You may find it easier to manually set the PATH to include the ecl client tools:
+**Note**:  You may find it easier to manually set the PATH to include the ecl client tools:
 ```
 set PATH=%PATH%;"c:\Program Files (x86)\HPCCSystems\6.2.0\clienttools\bin"
 ```
 
-**Note II**:  To use the "ecl bundle install &lt;git url&gt;" command, git must be installed on your machine and accessible to the user (in the path).
+### Without `git`
 
+To install using the `client tools` without `git`:
+1. Download:  https://github.com/hpcc-systems/Visualizer/archive/trunk.zip
+2. Unzip to “Visualizer” folder:  ```<USERS_FOLDER>\Downloads\Visualizer-trunk.zip```
+
+**Note**:  Depending on your zip tool the path below may vary slightly
+```
+ecl bundle install <USERS_FOLDER>\Downloads\Visualizer-trunk\Visualizer-trunk
+```
+
+All going well you should see:
+```
+Installing bundle Visualizer version 2.1.1
+Visualizer    2.1.1      ECL Visualization Bundle
+Installation complete
+```
 
 Using the Visualization library
 ===============================
