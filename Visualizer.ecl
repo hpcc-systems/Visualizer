@@ -657,8 +657,8 @@ EXPORT Visualizer := MODULE
         ENDMACRO;
 
         EXPORT __test := FUNCTION
-            viz_dataset := lookupFlatDataset('~progguide::exampledata::accounts');
-            viz_dashboard := logicalfileExt('dash', '~progguide::exampledata::accounts', viz_dataset);
+            viz_dataset := lookupFlatDataset('~visualizer::exampledata::accounts');
+            viz_dashboard := logicalfileExt('dash', '~visualizer::exampledata::accounts', viz_dataset);
             RETURN PARALLEL(viz_dashboard);
         END;
     END;

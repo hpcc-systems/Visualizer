@@ -23,9 +23,9 @@ EXPORT Step01b() := FUNCTION
         unsigned4 balance;
     END;
 
-    File := DATASET('~progguide::exampledata::accounts', AcctsRecord, FLAT);
-    FilePlus := DATASET('~progguide::exampledata::accounts', {AcctsRecord, UNSIGNED8 RecPos{VIRTUAL(fileposition)}}, FLAT);
-    personAccountsIdx := INDEX(FilePlus, {personid, RecPos}, '~progguide::exampledata::keys::accounts.personid');
+    File := DATASET('~visualizer::exampledata::accounts', AcctsRecord, FLAT);
+    FilePlus := DATASET('~visualizer::exampledata::accounts', {AcctsRecord, UNSIGNED8 RecPos{VIRTUAL(fileposition)}}, FLAT);
+    personAccountsIdx := INDEX(FilePlus, {personid, RecPos}, '~visualizer::exampledata::keys::accounts.personid');
     fetched := FETCH(FilePlus, personAccountsIdx(personID=personID_value), RIGHT.RecPos);
     RETURN OUTPUT(CHOOSEN(fetched, 2000), NAMED('Accounts'), OVERWRITE);
 END;
