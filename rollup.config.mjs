@@ -2,8 +2,7 @@ import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import postcss from "rollup-plugin-postcss";
-
-const pkg = require("./package.json");
+import pkg from "./package.json" with { type: "json" };
 
 function externals(id) {
     return !!pkg.dependencies[id];

@@ -5,3 +5,4 @@ eclcc.log
 dist/
 lib*/
 types
+package.json
