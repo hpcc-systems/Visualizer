@@ -18,9 +18,9 @@ var paths = {
     "@hpcc-js/timeline": "https://cdn.jsdelivr.net/npm/@hpcc-js/timeline@2.57.5/dist/index.min",
     "@hpcc-js/tree": "https://cdn.jsdelivr.net/npm/@hpcc-js/tree@2.45.4/dist/index.min",
     "@hpcc-js/util": "https://cdn.jsdelivr.net/npm/@hpcc-js/util@2.53.3/dist/index.min",
-    "d3-dsv": "https://cdn.jsdelivr.net/npm/d3-dsv@3.0.1/dist/d3-dsv.min",
-    "d3-fetch": "https://cdn.jsdelivr.net/npm/d3-fetch@3.0.1/dist/d3-fetch.min",
-    "tslib": "https://cdn.jsdelivr.net/npm/tslib@2.8.1/tslib"
+    "d3-dsv": "https://cdn.jsdelivr.net/npm/d3-dsv@3.0.2/dist/d3-dsv.min",
+    "d3-fetch": "https://cdn.jsdelivr.net/npm/d3-fetch@3.0.2/dist/d3-fetch.min",
+    "tslib": "https://cdn.jsdelivr.net/npm/tslib@2.9.1/tslib"
 };
 
 var debugPaths = {
